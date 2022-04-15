@@ -1,0 +1,64 @@
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public Node left;
+    public Node right;
+    public Node next;
+
+    public Node() {}
+    
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, Node _left, Node _right, Node _next) {
+        val = _val;
+        left = _left;
+        right = _right;
+        next = _next;
+    }
+};
+*/
+
+class Solution {
+    public Node connect(Node root) {
+        if(root == null) 
+        return root;
+ 
+    Node lastHead = root;
+    Node lastCurrent = null;
+    Node currentHead = null;
+    Node current = null;
+ 
+    while(lastHead!=null)
+    {
+        lastCurrent = lastHead;
+ 
+        while(lastCurrent!=null)
+        {
+            if(currentHead == null)
+            {
+                currentHead = lastCurrent.left;
+                current = lastCurrent.left;
+            }
+            else
+            {
+                current.next = lastCurrent.left;
+                current = current.next;
+            }
+ 
+            if(currentHead != null)
+            {
+                current.next = lastCurrent.right;
+                current = current.next;
+            }
+ 
+            lastCurrent = lastCurrent.next;
+        }
+        lastHead = currentHead;
+        currentHead = null;
+        }
+        return root;
+    }
+}
