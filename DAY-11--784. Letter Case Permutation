@@ -1,0 +1,33 @@
+class Solution
+{
+    public List<String> letterCasePermutation(String S) {
+    List<String> list = new ArrayList<>();
+    if (S == null) return list;
+    letterCasePermutation(list, new StringBuilder(), S, 0);
+    return list;
+}
+
+
+private void letterCasePermutation(List<String> list, 
+            StringBuilder sb, String S, int index){
+    if (index == S.length()) 
+    {
+        list.add(sb.toString()); 
+                              return;
+                             }
+    char c = S.charAt(index);
+    if (!Character.isLetter(c)) {  
+        sb.append(c);
+        letterCasePermutation(list, sb, S, index + 1);      
+        sb.deleteCharAt(sb.length() - 1);                  
+    } else {
+        sb.append(Character.toLowerCase(c));
+        letterCasePermutation(list, sb, S, index + 1);
+        sb.deleteCharAt(sb.length() - 1);
+
+        sb.append(Character.toUpperCase(c));
+        letterCasePermutation(list, sb, S, index + 1);
+        sb.deleteCharAt(sb.length() - 1);
+    }
+}
+}
